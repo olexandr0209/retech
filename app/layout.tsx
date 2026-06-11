@@ -1,5 +1,12 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import '../lib/globals.css'
+import { Providers } from './providers'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export const metadata: Metadata = {
   title: 'ReTech — Знайди людину. Поділись. Навчись.',
@@ -10,15 +17,14 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'ReTech',
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://retech.chat'),
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="uk">
       <body>
-        {/* AuthProvider підключається тут після: 'use client' wrapper */}
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   )
