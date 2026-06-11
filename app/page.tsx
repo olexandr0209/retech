@@ -286,7 +286,7 @@ export default function Home() {
     <>
       <style>{`
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        html, body { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; line-height: 1.6; }
         :root {
           --fire: #C85A2A; --fire-bg: #FAECE7; --fire-dark: #712B13; --fire-light: #F5C4B3;
@@ -303,7 +303,7 @@ export default function Home() {
             --blue-bg: #0f1a24; --blue-dark: #A8BDD0;
           }
         }
-        .container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 680px; margin: 0 auto; padding: 0 20px; width: 100%; }
         .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--fire); color: #fff; border: none; border-radius: var(--r); padding: 12px 26px; font-size: 15px; font-weight: 500; cursor: pointer; transition: opacity .15s, transform .1s; font-family: inherit; text-decoration: none; }
         .btn-primary:hover { opacity: .9; }
         .btn-primary:active { transform: scale(.98); }
@@ -315,7 +315,7 @@ export default function Home() {
         .lang-btn.active { background: var(--fire-bg); color: var(--fire-dark); border-color: var(--fire-light); }
         .section { padding: 3rem 0; border-bottom: 0.5px solid var(--border); }
         .section:last-child { border-bottom: none; }
-        .label { font-size: 11px; font-weight: 500; color: var(--hint); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1rem; }
+        .label { font-size: 11px; font-weight: 500; color: var(--hint); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
         .h2 { font-size: 22px; font-weight: 500; color: var(--text); line-height: 1.4; margin-bottom: 1.25rem; }
         .badge-fire { display: inline-block; background: var(--fire-bg); color: var(--fire-dark); border-radius: 6px; padding: 3px 10px; font-size: 12px; font-weight: 500; }
         .badge-blue { display: inline-block; background: var(--blue-bg); color: var(--blue-dark); border-radius: 6px; padding: 3px 10px; font-size: 12px; font-weight: 500; }
@@ -325,28 +325,32 @@ export default function Home() {
         .step-num { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; flex-shrink: 0; margin-top: 2px; }
         .faq-item { border-bottom: 0.5px solid var(--border); padding: 14px 0; cursor: pointer; }
         .faq-item:last-child { border-bottom: none; }
-        .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border-bottom: 0.5px solid var(--border); padding: 1rem 20px; z-index: 20; }
+        .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border-bottom: 0.5px solid var(--border); padding: 1.25rem 20px; z-index: 20; }
         @media (prefers-color-scheme: dark) { .mobile-menu { background: #111; } }
         .mobile-menu.open { display: block; }
+        .burger { display: none; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; padding: 8px; color: var(--text); flex-shrink: 0; }
         @media (max-width: 768px) {
-          .nav-links { display: none; }
-          .nav-right { display: none; }
+          .nav-links { display: none !important; }
+          .nav-right { display: none !important; }
           .burger { display: flex !important; }
+          .container { padding: 0 20px !important; }
+          .section { padding: 2rem 0; }
           .lang-row { display: flex; gap: 6px; margin-bottom: 1rem; }
-          .mobile-nav-links { display: flex; flex-direction: column; gap: 12px; }
-          .mobile-nav-links button { font-size: 16px; color: var(--text); background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; }
-          .mobile-cta { display: flex; gap: 8px; margin-top: 1rem; }
-          .btn-primary, .btn-outline { font-size: 14px; padding: 11px 20px; }
+          .mobile-nav-links { display: flex; flex-direction: column; gap: 14px; margin-bottom: 1rem; }
+          .mobile-nav-links button { font-size: 16px; color: var(--text); background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; padding: 0; }
+          .mobile-cta { display: flex; gap: 8px; margin-top: 0.5rem; }
+          .mobile-cta .btn-primary { flex: 1; justify-content: center; font-size: 14px; padding: 11px 16px; }
+          .btn-primary { font-size: 14px; padding: 11px 20px; }
+          .btn-outline { font-size: 14px; padding: 10px 18px; }
           .hero-buttons { flex-direction: column; align-items: stretch; }
-          .hero-buttons .btn-primary, .hero-buttons .btn-outline { justify-content: center; }
+          .hero-buttons .btn-primary, .hero-buttons .btn-outline { justify-content: center; width: 100%; }
           .stats-grid { grid-template-columns: 1fr 1fr 1fr; }
           .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
           .footer-bottom { flex-direction: column; gap: 4px; }
-          .h2 { font-size: 20px; }
+          .h2 { font-size: 19px; }
           .who-grid { grid-template-columns: 1fr !important; }
+          h1 { font-size: 26px !important; }
         }
-        .burger { display: none; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; padding: 6px; color: var(--text); }
-        scroll-margin-top: 70px;
         #how, #people, #who, #faq { scroll-margin-top: 70px; }
       `}</style>
 
@@ -372,8 +376,8 @@ export default function Home() {
                 <button key={l} className={`lang-btn${lang === l ? ' active' : ''}`} onClick={() => setLang(l)}>{l.toUpperCase()}</button>
               ))}
             </div>
-            <button className="btn-ghost">{t.nav.login}</button>
-            <button className="btn-primary" style={{ fontSize: 13, padding: '9px 18px' }}>{t.nav.join}</button>
+            <a href="/login" className="btn-ghost" style={{ textDecoration: 'none' }}>{t.nav.login}</a>
+            <a href="/register" className="btn-primary" style={{ fontSize: 13, padding: '9px 18px', textDecoration: 'none' }}>{t.nav.join}</a>
           </div>
 
           <button className="burger" aria-label="Меню" onClick={() => setMenuOpen(!menuOpen)}>
@@ -398,8 +402,8 @@ export default function Home() {
             ))}
           </div>
           <div className="mobile-cta">
-            <button className="btn-ghost">{t.nav.login}</button>
-            <button className="btn-primary" style={{ flex: 1, justifyContent: 'center' }}>{t.nav.join}</button>
+            <a href="/login" className="btn-ghost" style={{ textDecoration: 'none' }}>{t.nav.login}</a>
+            <a href="/register" className="btn-primary" style={{ flex: 1, justifyContent: 'center', textDecoration: 'none' }}>{t.nav.join}</a>
           </div>
         </div>
       </header>
@@ -420,8 +424,8 @@ export default function Home() {
               {t.hero.desc}
             </p>
             <div className="hero-buttons" style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
-              <button className="btn-primary">{t.hero.btnLearn} →</button>
-              <button className="btn-outline">{t.hero.btnShare}</button>
+              <a href="/register" className="btn-primary">{t.hero.btnLearn} →</a>
+              <a href="/register" className="btn-outline">{t.hero.btnShare}</a>
             </div>
           </div>
 
@@ -539,8 +543,8 @@ export default function Home() {
             </h2>
             <p style={{ fontSize: 14, color: 'var(--muted)', marginBottom: '1.75rem', fontStyle: 'italic' }}>{t.cta.sub}</p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1rem' }}>
-              <button className="btn-primary" style={{ fontSize: 15, padding: '13px 32px' }}>{t.cta.btn} →</button>
-              <button className="btn-ghost" style={{ padding: '12px 24px', fontSize: 14 }}>{t.cta.login}</button>
+              <a href="/register" className="btn-primary" style={{ fontSize: 15, padding: '13px 32px', textDecoration: 'none' }}>{t.cta.btn} →</a>
+              <a href="/login" className="btn-ghost" style={{ padding: '12px 24px', fontSize: 14, textDecoration: 'none' }}>{t.cta.login}</a>
             </div>
             <div style={{ fontSize: 12, color: 'var(--hint)' }}>{t.cta.note}</div>
           </div>
